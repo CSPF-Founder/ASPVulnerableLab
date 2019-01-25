@@ -1,0 +1,117 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteMaster.master.cs" Inherits="ASPVulnerableLab.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <title>ASP Vulnerable Lab</title>
+    <link rel="stylesheet" href="~/style.css" type="text/css" runat="server" />
+</head>
+
+<body>
+    <div id="container">
+        <header>
+        <div class="content-wrapper">
+        
+            <div>
+                <nav>
+                    <ul id="menu">
+                        <li><a id="A3" runat="server" href="~/">Home</a></li>
+                        <li>
+                            <a href="#">Vulnerabilities</a>
+                            <ul>
+                                <li><a href="#">1. SQL Injection</a>
+                                    <ul>
+                                        <li><a runat="server" href="~/Posts/View.aspx?id=1">Demo 1</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">2. BAASM</a>
+                                    <ul>
+                                        <li><a runat="server" href="~/Account/ChangePassword.aspx">Demo 1</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">3. XSS</a>
+                                    <ul>
+                                        <li><a runat="server" href="~/ErrorPage.aspx?error=Error Occurred">Demo 1</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="#">4. IDOR</a>
+                                    <ul>
+                                        <%
+                                            if(Session["user_id"] !=null){
+                                                %>
+                                            <li><a href="<%= ResolveUrl("~/Account/Info.aspx") + "?account_id=" + Session["user_id"] %>">Demo 1</a></li>
+                                            <%
+                                            }
+                                              else
+                                              {
+                                             %>
+                                        <li><a runat="server" href="~/Account/Info.aspx?account_id=1">Demo 1</a></li>
+                                        <%} %>
+                                    </ul>
+                                </li>
+                                <li><a href="#">5. Security Misconfiguration</a>
+                                    <ul>
+                                        <li><a id="A1" runat="server" href="~/Account/">Demo 1</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">6. Sensitive Data Exposure</a>
+                                    <ul>
+                                       <li><a id="A2" runat="server" href="~/Vulnerabilities/SDE/Demo1.aspx?id=1">Demo 2</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">7. Missing Function Level Access Control</a>
+                                    <ul>
+                                        <li><a runat="server" href="~/robots.txt">Demo 1</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">8. CSRF</a>
+                                    <ul>
+                                        <li><a runat="server" href="~/Account/EditSecret.aspx">Demo 1</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="~/Account/Login.aspx?returnUrl=/" runat="server">10. Unvalidated Redirect</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <%
+                         if(Session["isLoggedIn"] == null){
+                         %>
+                        <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                        <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                        <%
+                        }
+                        else
+                        {    
+                        %>
+                        <li><a id="A5" runat="server" href="~/Application/EditTitle.aspx">EditTitle</a></li>
+                        <li><a id="A4" runat="server" href="~/Account/Logout.aspx">Logout</a></li>
+                        <%
+                        }
+                         %>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="Main">
+        <section class="content-wrapper main-content clear-fix">
+            <asp:PlaceHolder runat="server" ID="AppTitle" />
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; <%: DateTime.Now.Year %> - CSPF</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

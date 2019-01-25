@@ -1,0 +1,11 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" CodeBehind="ChangePassword.aspx.cs" Inherits="ASPVulnerableLab.Account.ChangePassword" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <form runat="server">
+        <div>
+        <asp:Label runat="server" ID="NewPasswordLabel" AssociatedControlID="NewPassword">New password</asp:Label>
+        <asp:TextBox runat="server" ID="NewPassword" CssClass="passwordEntry" TextMode="Password" /><br /><br />
+        <asp:Button ID="ChangePasswordButton" runat="server" OnClick="ChangePassword_Click" Text="Change password"  />
+        </div>
+    </form>
+    <asp:PlaceHolder ID = "ChangePasswordStatus" runat="server" />
+</asp:Content>
